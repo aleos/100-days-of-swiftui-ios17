@@ -29,8 +29,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Form {
+                let localCurrency = Locale.current.currency?.identifier ?? "USD"
                 Section {
-                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    TextField("Amount", value: $checkAmount, format: .currency(code: localCurrency))
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
                     
@@ -55,7 +56,7 @@ struct ContentView: View {
                 }
                 
                 Section("Total amount for the check") {
-                    Text(total, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(total, format: .currency(code: localCurrency))
                 }
             }
             .navigationTitle("WeSplit")
