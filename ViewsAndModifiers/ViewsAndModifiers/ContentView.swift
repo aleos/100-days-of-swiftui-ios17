@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .titleStyle()
-        Color.blue
-            .frame(width: 200, height: 200)
-            .watermarked(with: "Hacking with SwiftUI")
+        GridStack(rows: 4, columns: 4) { row, col in
+            Image(systemName: "\(row * 4 + col).circle")
+            Text("R\(row) C\(col)")
+        }
     }
 }
 
