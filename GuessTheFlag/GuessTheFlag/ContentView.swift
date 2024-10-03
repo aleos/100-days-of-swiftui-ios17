@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var scoreTitle = ""
     @State private var score = 0
     
-    @State private var question = 0
+    @State private var question = 1
     @State private var showingResult = false
     
     var body: some View {
@@ -79,10 +79,10 @@ struct ContentView: View {
         } message: {
             Text("Your score is \(score)")
         }
-        .alert("The End", isPresented: $showingResult) {
-            Button("Restart", action: restart)
+        .alert("Game over!", isPresented: $showingResult) {
+            Button("Start again", action: restart)
         } message: {
-            Text("Your score is \(score)")
+            Text("Your final score was \(score)")
         }
     }
     
@@ -104,27 +104,23 @@ struct ContentView: View {
             }
         }
         
-        showingScore = true
-    }
-    
-    private func shuffle() {
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
-    }
-    
-    func askQuestion() {
-        if question < 7 {
-            question += 1
-            shuffle()
+        if question < 8 {
+            showingScore = true
         } else {
             showingResult = true
         }
     }
     
+    func askQuestion() {
+        question += 1
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
+    }
+    
     func restart() {
         question = 0
         score = 0
-        shuffle()
+        askQuestion()
     }
     
 }
