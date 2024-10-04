@@ -51,12 +51,13 @@ struct ContentView: View {
                     .pickerStyle(.navigationLink)
                 }
                 
-                Section("Amount per person") {
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                Section("Total amount") {
+                    Text(total, format: .currency(code: localCurrency))
+                        .foregroundStyle(tipPercentage == 0 ? .red : .primary)
                 }
                 
-                Section("Total amount for the check") {
-                    Text(total, format: .currency(code: localCurrency))
+                Section("Amount per person") {
+                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
             .navigationTitle("WeSplit")
